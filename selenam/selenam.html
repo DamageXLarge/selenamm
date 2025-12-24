@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selena ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffb6c1,#ffe6eb);
+    font-family:'Poppins', Arial, sans-serif;
+    overflow:hidden;
+}
+
+/* Zarf */
+.envelope{
+    position:relative;
+    width:260px;
+    height:260px;
+    cursor:pointer;
+}
+
+/* Kalp zarf */
+.heart{
+    position:absolute;
+    width:160px;
+    height:160px;
+    background:#ff2e63;
+    transform:rotate(-45deg);
+    top:50px;
+    left:50px;
+}
+
+.heart::before,
+.heart::after{
+    content:"";
+    position:absolute;
+    width:160px;
+    height:160px;
+    background:#ff2e63;
+    border-radius:50%;
+}
+
+.heart::before{ top:-80px; left:0; }
+.heart::after{ left:80px; top:0; }
+
+/* Kart */
+.card{
+    position:absolute;
+    top:40px;
+    left:20px;
+    width:220px;
+    min-height:200px;
+    background:white;
+    border-radius:14px;
+    text-align:center;
+    padding:15px;
+    box-sizing:border-box;
+    transform:translateY(80px) scale(0.9);
+    opacity:0;
+    transition:0.7s ease;
+    z-index:-1;
+}
+
+/* Açılma */
+.envelope.open .card{
+    transform:translateY(-110px) scale(1);
+    opacity:1;
+    z-index:2;
+}
+
+/* Yazı */
+.card h1{
+    margin:8px 0 10px;
+    color:#ff2e63;
+    font-size:28px;
+    letter-spacing:1px;
+}
+
+/* Resimler */
+.images{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.images img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:10px;
+    margin:4px;
+}
+
+/* Uçan kalpler */
+.floating-heart{
+    position:absolute;
+    font-size:20px;
+    color:#ff2e63;
+    animation:floatUp 4s linear forwards;
+}
+
+@keyframes floatUp{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-600px) scale(1.8);
+    }
+}
+
+/* Telefon uyumu */
+@media(max-width:480px){
+    .envelope{
+        transform:scale(0.85);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openEnvelope(this)">
+    <div class="heart"></div>
+
+    <div class="card">
+        <h1>SELENAM</h1>
+
+        <div class="images">
+            <img src="selena.jpg">
+            
+        </div>
+    </div>
+</div>
+
+<!-- Müzik -->
+<audio id="music">
+    <!-- Yeni nesil romantik vibe (örnek) -->
+    <source src="romantic-homocide.webm" type="audio/mpeg">
+</audio>
+
+<script>
+function openEnvelope(el){
+    el.classList.toggle("open");
+
+    const music = document.getElementById("music");
+    music.volume = 0.6;
+    music.play();
+
+    // Kalp animasyonu
+    for(let i=0;i<18;i++){
+        createHeart();
+    }
+}
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.bottom = "0px";
+    heart.style.fontSize = (18 + Math.random()*20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },4000);
+}
+</script>
+
+</body>
+</html>
